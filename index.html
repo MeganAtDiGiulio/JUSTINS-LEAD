@@ -3,14 +3,12 @@
 <head>
    <meta charset="UTF-8"> 
    <meta name="viewport" content="width=device-width, initial-scale=1.0">     
-   <title>Redirect Page</title> 
+   <title>LEAD</title> 
    <script> 
       window.onload = function() { 
-        // Check if the "clicked" flag is set in localStorage
-        if (!localStorage.getItem('clicked')) { 
-
-
-            // First person: set 'clicked' flag and redirect them to page1.html 
+        // Check if the "clicked" flag is already set in localStorage
+        if (!localStorage.getItem('clicked')) {
+           // First person: set 'clicked' flag and redirect them to page1.html 
             localStorage.setItem('clicked', 'true');
             window.location.href = 'https://streeteasy.com/building/146-east-39-street-new_york/4b?featured=1';
        } else {
