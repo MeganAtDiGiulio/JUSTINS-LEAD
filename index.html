@@ -6,14 +6,14 @@
    <title>LEAD</title> 
    <script> 
       window.onload = function() { 
-        // Check if the "clicked" flag is already set in localStorage
-        if (!localStorage.getItem('clicked')) {
-           // First device: set 'clicked' flag and redirect them to page1.html 
-            localStorage.setItem('clicked', 'true');
-            window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f';
+        // Check if 'firstDeviceVisited' is already set in localStorage
+        if (!localStorage.getItem('firstDeviceVisited')) {
+           // If it's the first device, mark it as visited and redirect to page1.html 
+            localStorage.setItem('firstDeviceVisited', 'true');
+            window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to page1
        } else {
-            // Second device (and onward): redirect them to page2.html 
-            window.location.href = 'https://sites.google.com/view/too-slow/p%C3%A1gina-principal';
+            // If another device is visiting, send them to page2.html 
+            window.location.href = 'https://sites.google.com/view/too-slow/p%C3%A1gina-principal'; // Redirect to page2
        }
      
     } 
