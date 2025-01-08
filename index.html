@@ -6,6 +6,16 @@
    <title>LEAD</title> 
    <script> 
       window.onload = function() { 
+         <!-- A simple reset button -->
+         <button onclick="resetFirstDevice()">Reset Frist Visitor</button>
+
+         <script>
+          // Reset function to clear the localStorage and restart the visitor tracking
+          function resetFirstDevice() {
+             localStorage.removeItem('firstDeviceVisited'); // Remove the tracking flag
+             alert('First device has been reset. Next visitor will be treated as the first.');
+             window.location.href = 'index.hmtl'; //optionally redirect to the main page
+          }
         // Check if 'firstDeviceVisited' already exists in localStorage
         if (!localStorage.getItem('firstDeviceVisited')) {
            // If no first device has visited yet, set this device as the first and redirect to page1.html 
