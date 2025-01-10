@@ -1,33 +1,30 @@
-<!DOCTYPE html> 
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en"> 
 <head>
-   <meta charset="UTF-8"> 
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">     
-   <title>LEAD</title> 
-   </head> 
-   <body>
-
-      <!-- A simple reset button -->
-      <button onclick="resetFirstDevice()">Reset First Visitor</button>
-
-         <script>
-          // Reset function to clear the localStorage and restart the visitor tracking
-          function resetFirstDevice() {
-             localStorage.removeItem('firstDeviceVisited'); // Remove the tracking flag
-             alert('First device has been reset. Next visitor will be treated as the first.');
-             window.location.href = 'https://www.google.com/'; //optionally redirect to the main page
-          }
-        // Check for the firstDeviceVisited flag in localStorage
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>LEAD</title>
+</head>
+<body> 
+  <script>
+     // Check for the "reset" query parameter to reset flow for the next visitor (used only by you)
+     const urlParams = new URLSearchParams(window.location.search);
+     if (urlParams.get('reset') === 'true') {
+        // Reset the flow by clearing localStorage and redirecting to the first page 
+        localStorage.clear();
+        window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to page1 (first-time visit)
+     } else {
+        // Check if the "firstDeviceVisited" flag is set in localStorage
         if (!localStorage.getItem('firstDeviceVisited')) {
-           // It's the first device to visit, set it as the first
-           const uniqueDeviceId = Date.now(); // A unique identifier (timestamp)
-            localStorage.setItem('firstDeviceVisited', uniqueDeviceId); // Store in localStorage
-            window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to page1
-       } else {
-            // All subsequent devices to page2.html 
-            window.location.href = 'https://sites.google.com/view/too-slow/p%C3%A1gina-principal'; // Redirect to page2
-       }
-   </script>
-      
+           // It's the first device to visit, set it as the first device
+           const uniqueDeviceId = Date.now(); // Use timestamp as a unique identifier
+           localStorage.setItem('firstDeviceVisited', uniqueDeviceId); // Store in localStorage
+           window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to page1
+        } else { 
+           // All subsequent devices are redirected to page2.html 
+           window.location.href = 'https://sites.google.com/view/too-slow/p%C3%A1gina-principal'; // Redirect to page2
+        }
+     }
+  </script> 
 </body> 
 </html>
