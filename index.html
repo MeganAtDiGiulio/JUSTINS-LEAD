@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html lang="en"> 
-<head>
-   <meta charset="UTF-8">
+<head> 
+   <meta charset="UTF-8"> 
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>LEAD</title>
-</head>
+</head> 
 <body> 
-  <script>
-     // Check for the "reset" query parameter to reset flow for the next visitor (used only by you)
-     const urlParams = new URLSearchParams(window.location.search);
-     if (urlParams.get('reset') === 'true') {
-        // Reset the flow by clearing localStorage and redirecting to the first page 
-        localStorage.clear();
-        window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to page1 (first-time visit)
-     } else {
-        // Check if the "firstDeviceVisited" flag is set in localStorage
-        if (!localStorage.getItem('firstDeviceVisited')) {
-           // It's the first device to visit, set it as the first device
-           const uniqueDeviceId = Date.now(); // Use timestamp as a unique identifier
-           localStorage.setItem('firstDeviceVisited', uniqueDeviceId); // Store in localStorage
-           window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to page1
-        } else { 
-           // All subsequent devices are redirected to page2.html 
-           window.location.href = 'https://sites.google.com/view/too-slow/p%C3%A1gina-principal'; // Redirect to page2
-        }
-     }
-  </script> 
+   <script> 
+      // Check for the "reset" query parameter to reset flow (used only by you)
+      const urlParams = new URLSearchParams(window.location.search);
+      
+      // If the URL contains ?reset=true, perform the reset (clear localStorage)
+      if (urlParams.get('reset') === 'true') {
+         // Ensure that only you (as admin) can trigger the reset
+         if (localStorage.getItem('admin') === 'true') {
+            localStorage.clear(); // Clear localStorage to reset the flow
+            window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to page1 for the next visitor
+         } else {
+            alert('You are not authorized to reset the flow.'); 
+         } 
+      } else {
+         // Check if the "firstDeviceVisited" flag is set in localStorage
+         if (!localStorage.getItem('firstDeviceVisited')) { 
+            // It's the first device to visit, set it as the first device 
+            const uniqueDeviceId = Date.now(); // Unique identifier (timestamp)
+            localStorage.setItem('firstDeviceVisited', uniqueDeviceId); // Store in localStorage 
+            window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to page1 
+         } else { 
+            // All subsequent devices to page2.html
+            window.location.href = 'https://sites.google.com/view/too-slow/p%C3%A1gina-principal'; // Redirect to page2 
+         } 
+      } 
+   </script> 
 </body> 
 </html>
