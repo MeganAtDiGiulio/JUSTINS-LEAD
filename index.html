@@ -17,20 +17,17 @@
              alert('First device has been reset. Next visitor will be treated as the first.');
              window.location.href = 'https://www.google.com/'; //optionally redirect to the main page
           }
-        // Check if 'firstDeviceVisited' already exists in localStorage
+        // Check for the firstDeviceVisited flag in localStorage
         if (!localStorage.getItem('firstDeviceVisited')) {
-           // If no first device has visited yet, set this device as the first and redirect to page1.html 
+           // It's the first device to visit, set it as the first
            const uniqueDeviceId = Date.now(); // A unique identifier (timestamp)
-            localStorage.setItem('firstDeviceVisited', uniqueDeviceId);
+            localStorage.setItem('firstDeviceVisited', uniqueDeviceId); // Store in localStorage
             window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to page1
        } else {
-            // If the first device has already been tracked, send all subsequent devices to page2.html 
+            // All subsequent devices to page2.html 
             window.location.href = 'https://sites.google.com/view/too-slow/p%C3%A1gina-principal'; // Redirect to page2
        }
-     
-    } 
    </script>
- </head>
- <body> 
+      
 </body> 
 </html>
