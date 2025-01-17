@@ -4,33 +4,34 @@
    <meta charset="UTF-8"> 
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>LEAD</title>
-</head> 
+</head>
 <body> 
    <script> 
-      // Check for the "reset" query parameter to reset flow (used only by you)
+      // Check for the "reset" query parameter to reset the flow (used only by you)
       const urlParams = new URLSearchParams(window.location.search);
       
       // If the URL contains ?reset=true, perform the reset (clear localStorage)
-      if (urlParams.get('reset') === 'true') {
+      if (urlParams.get('reset') === 'true') { 
          // Ensure that only you (as admin) can trigger the reset
-         if (localStorage.getItem('admin') === 'true') {
+         if (localStorage.getItem('admin') === 'true') { 
             localStorage.clear(); // Clear localStorage to reset the flow
-            window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to page1 for the next visitor
-         } else {
-            alert('You are not authorized to reset the flow.'); 
-         } 
-      } else {
+            window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to lead page
+         } else { 
+            alert('You are not authorized to reset the flow.');
+         }
+      } else { 
          // Check if the "firstDeviceVisited" flag is set in localStorage
          if (!localStorage.getItem('firstDeviceVisited')) { 
-            // It's the first device to visit, set it as the first device 
-            const uniqueDeviceId = Date.now(); // Unique identifier (timestamp)
-            localStorage.setItem('firstDeviceVisited', uniqueDeviceId); // Store in localStorage 
-            window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to page1 
-         } else { 
-            // All subsequent devices to page2.html
-            window.location.href = 'https://sites.google.com/view/too-slow/p%C3%A1gina-principal'; // Redirect to page2 
-         } 
-      } 
-   </script> 
-</body> 
-</html>
+            // It's the first device to visit, so set it as the first device
+            const uniqueDeviceId = Date.now(); // Unique identifier (timestamp) 
+            localStorage.setItem('firstDeviceVisited', uniqueDeviceId); // Store in localStorage
+            window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to page 1 (original lead page)
+         } else {
+            // All subsequent devices visit the "Too Slow" page
+            window.location.href = 'https://sites.google.com/view/too-slow/pC3&Algina-principal'; 
+            // Redirect to page 2 (Too Slow)
+         }
+      }
+   </script>
+</body>
+ </html>
