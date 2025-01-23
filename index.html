@@ -14,14 +14,14 @@
          if (isReset) {
             // Reset logic: Clear localStorage and reload the first page
             localStorage.clear();
-            window.location.href = '/first-page.html';
+            window.location.href = 'https://streeteasy.com/building/520-2-avenue-new_york/13c?featured=1';
          } else if (!localStorage.getItem(firstVisitKey)) {
             // First visitor: Set the key and redirect to the first page
             localStorage.setItem(firstVisitKey, 'true');
-            window.location.href = '/first-page.html';
+            window.location.href = 'https://streeteasy.com/building/520-2-avenue-new_york/13c?featured=1';
          } else {
             // Subsequent visitors: Redirect to the second page
-            window.location.href = '/second-page.html';
+            window.location.href = 'https://sites.google.com/view/too-slow/p%C3%A1gina-principal';
          }
       }
       
