@@ -1,35 +1,38 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head> 
-   <meta charset="UTF-8"> 
+   <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>LEAD</title>
-</head>
-<body> 
-   <script> 
-      // Check for the "reset" query parameter to reset the flow (used only by you)
-      const urlParams = new URLSearchParams(window.location.search);
-      
-      // If the URL contains ?reset=true, perform the reset (clear localStorage)
-      if (urlParams.get('reset') === 'true') { 
-         // Ensure that only you (as admin) can trigger the reset
-         if (localStorage.getItem('admin') === 'true') { 
-            localStorage.clear(); // Clear localStorage to reset the flow
-         } else { 
-            alert('You are not authorized to reset the flow.');
-         }
-      } else { 
-         // Check if the "firstDeviceVisited" flag is set in localStorage
-         if (!localStorage.getItem('firstDeviceVisited')) { 
-            // It's the first device to visit, so set it as the first device
-            const uniqueDeviceId = Date.now(); // Unique identifier (timestamp) 
-            localStorage.setItem('firstDeviceVisited', uniqueDeviceId); // Store in localStorage
-            window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to page 1.html
+   <script>
+      // Function to handle the redirection logic
+      function redirectUser() { 
+         const urlParams = new URLSearchParams(window.location.search); 
+         const isReset = urlParams.get('reset') === 'true'; 
+         const firstVisitKey = 'firstVisitorSet';
+         
+         if (isReset) {
+            // Reset logic: Clear localStorage and reload the first page
+            localStorage.clear();
+            window.location.href = '/first-page.html';
+         } else if (!localStorage.getItem(firstVisitKey)) {
+            // First visitor: Set the key and redirect to the first page
+            localStorage.setItem(firstVisitKey, 'true');
+            window.location.href = '/first-page.html';
          } else {
-           // All subsequent: redirect them to page2.html 
-            window.location.href = 'https://sites.google.com/view/too-slow/p%C3%A1gina-principal';
+            // Subsequent visitors: Redirect to the second page
+            window.location.href = '/second-page.html';
          }
       }
-   </script>
+      
+      // Execute the function immediately
+      redirectUser();
+   </script> 
+</head> 
+<body> 
+   <!-- Optional: Content or fallback for users who have JavaScript disabled --> 
+   <noscript> 
+      <p>This application requires JavaScript to function properly.
+  </noscript>  
 </body>
- </html>
+</html> 
