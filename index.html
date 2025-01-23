@@ -15,7 +15,6 @@
          // Ensure that only you (as admin) can trigger the reset
          if (localStorage.getItem('admin') === 'true') { 
             localStorage.clear(); // Clear localStorage to reset the flow
-            window.location.href = 'https://streeteasy.com/building/233-east-32-street-new_york/1f'; // Redirect to page 1.html
          } else { 
             alert('You are not authorized to reset the flow.');
          }
