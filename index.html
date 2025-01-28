@@ -1,38 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>LEAD</title>
+   <title>Redirect Logic</title>
    <script>
-      // Function to handle the redirection logic
-      function redirectUser() { 
-         const urlParams = new URLSearchParams(window.location.search); 
-         const isReset = urlParams.get('reset') === 'true'; 
-         const firstVisitKey = 'firstVisitorSet';
+      // Function to set a cookie 
+      function setCookie(name, value, days) { 
+         const date = new Date();
+         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+         const expires = "expires=" + date.toUTCString();
+         document.cookie = name + "=" + value + ";" + expires + ";path=/";
+      }
+      
+      // Function to get a cookie by name
+      function getCookie(name) {
+         const decodedCookie = decodeURIComponent(document.cookie);
+         const cookies = decodedCookie.split(';');
+         for (let i = 0; i < cookies.length; i++) {
+            let c = cookies[i].trim();
+            if (c.indexOf(name + "=") === 0) {
+               return c.substring(name.length + 1);
+            }
+         }
+         return "";
+      }
+      // Function to handle redirection logic
+      function redirectUser() {
+         const urlParams = new URLSearchParams(window.location.search);
+         const isReset = urlParams.get('reset') === 'true';
+         // Define the cookie name
+         const firstVisitCookie = "firstVisitorSet";
          
          if (isReset) {
-            // Reset logic: Clear localStorage and reload the first page
-            localStorage.clear();
-            window.location.href = 'https://streeteasy.com/building/520-2-avenue-new_york/13c?featured=1';
-         } else if (!localStorage.getItem(firstVisitKey)) {
-            // First visitor: Set the key and redirect to the first page
-            localStorage.setItem(firstVisitKey, 'true');
-            window.location.href = 'https://streeteasy.com/building/520-2-avenue-new_york/13c?featured=1';
+            // Reset logic: Clear the cookie and redirect to the first page
+            setCookie(firstVisitCookie, "", -1); // Delete the cookie
+            window.location.href = '/first-page.html';
+         } else if (!getCookie(firstVisitCookie)) {
+            // First visitor: Set the cookie and redirect to the first page
+            setCookie(firstVisitCookie, "true", 7); // Cookie valid for 7 days
+            window.location.href = '/first-page.html';
          } else {
             // Subsequent visitors: Redirect to the second page
-            window.location.href = 'https://sites.google.com/view/too-slow/p%C3%A1gina-principal';
+            window.location.href = '/second-page.html';
          }
       }
       
       // Execute the function immediately
       redirectUser();
-   </script> 
-</head> 
-<body> 
-   <!-- Optional: Content or fallback for users who have JavaScript disabled --> 
-   <noscript> 
-      <p>This application requires JavaScript to function properly.
-  </noscript>  
+   </script>
+</head>
+<body>
+   <noscript>
+      <p>This application requires JavaScript to function properly. Please enable JavaScript in your browser.</p>
+   </noscript>
 </body>
-</html> 
+</html>
