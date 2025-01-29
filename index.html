@@ -35,14 +35,14 @@
          if (isReset) {
             // Reset logic: Clear the cookie and redirect to the first page
             setCookie(firstVisitCookie, "", -1); // Delete the cookie
-            window.location.href = '/first-page.html';
+            window.location.href = 'https://streeteasy.com/building/the-ritz-plaza/009f?featured=1';
          } else if (!getCookie(firstVisitCookie)) {
             // First visitor: Set the cookie and redirect to the first page
             setCookie(firstVisitCookie, "true", 7); // Cookie valid for 7 days
-            window.location.href = '/first-page.html';
+            window.location.href = 'https://streeteasy.com/building/the-ritz-plaza/009f?featured=1';
          } else {
             // Subsequent visitors: Redirect to the second page
-            window.location.href = '/second-page.html';
+            window.location.href = 'https://sites.google.com/view/too-slow/p%C3%A1gina-principal';
          }
       }
       
